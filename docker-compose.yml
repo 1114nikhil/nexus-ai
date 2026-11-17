@@ -1,0 +1,21 @@
+services:
+  postgres:
+    image: postgres:16
+    ports: ["5432:5432"]
+  
+  nexus-ai-service:
+    build: ./nexus-ai-service
+    port: ["8000:8000"]
+    depends_on: [postgres]
+
+  nexus-springboot-backend:
+    build: ./nexus-springboot-backend
+    port: ["8080:8080"]
+    environment:
+      AI_SERVICE_URL: http://nexus-ai-service:8000
+    depends_on: [postgres,nexus-ai-service]
+
+  nexus-frontend:
+    build: ./nexus-frontend
+    port: ["4200:80"]
+    depends_on: [nexus-springboot-backend]

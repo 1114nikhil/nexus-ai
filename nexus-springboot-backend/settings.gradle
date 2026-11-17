@@ -1,1 +1,5 @@
 rootProject.name = 'nexus-springboot-backend'
+include 'nexus-domain'
+include 'nexus-application'
+include 'nexus-infrastructure'
+include 'nexus-api'
