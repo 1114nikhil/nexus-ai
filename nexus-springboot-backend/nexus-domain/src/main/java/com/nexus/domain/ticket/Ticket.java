@@ -1,5 +1,6 @@
 package com.nexus.domain.ticket;
 
+import java.time.Instant;
 import java.util.UUID;
 
 public class Ticket {
@@ -7,21 +8,23 @@ public class Ticket {
     private final String title;
     private final String description;
     private final TicketPriority priority;
-
     private TicketStatus status;
+    private final Instant createdAt;
 
     private Ticket(
             UUID id,
             String title,
             String description,
             TicketPriority priority,
-            TicketStatus status
+            TicketStatus status,
+            Instant createdAt
     ){
         this.id=id;
         this.title=title;
         this.description=description;
         this.priority=priority;
         this.status=status;
+        this.createdAt = createdAt;
     }
 
 //    Static factory method
@@ -40,11 +43,16 @@ public class Ticket {
                 title,
                 description,
                 priority,
-                TicketStatus.OPEN
+                TicketStatus.OPEN,
+                Instant.now()
         );
     }
 
-//    Business operation:Start Operation
+    public static Ticket reconstitute(UUID id, String title, String description, TicketPriority priority, TicketStatus status,Instant createdAt) {
+        return new Ticket(id, title, description, priority, status, createdAt);
+    }
+
+    //    Business operation:Start Operation
     public void startProgress(){
         if(this.status!=TicketStatus.OPEN){
             throw new IllegalStateException("Ticket is not in OPEN status!");
@@ -79,4 +87,6 @@ public class Ticket {
     public TicketStatus getStatus() {
         return status;
     }
+    // Getter:
+    public Instant getCreatedAt() { return createdAt; }
 }

@@ -1,9 +1,6 @@
 import com.nexus.domain.ticket.Ticket;
 import com.nexus.domain.ticket.TicketPriority;
 import com.nexus.domain.ticket.TicketStatus;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 
 public class TicketTest {

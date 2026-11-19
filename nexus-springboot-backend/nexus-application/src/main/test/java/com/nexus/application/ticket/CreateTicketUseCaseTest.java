@@ -1,4 +1,4 @@
-package java.com.nexus.application.ticket;
+package com.nexus.application.ticket;
 
 import com.nexus.application.ticket.CreateTicketCommand;
 import com.nexus.application.ticket.CreateTicketUseCase;
@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 
 public class CreateTicketUseCaseTest {
 
