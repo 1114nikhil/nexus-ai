@@ -3,6 +3,8 @@ package com.nexus.infrastructure.persistence.ticket;
 import com.nexus.domain.ticket.TicketPriority;
 import com.nexus.domain.ticket.TicketStatus;
 import jakarta.persistence.*;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.time.Instant;
 import java.util.UUID;
@@ -23,7 +25,7 @@ public class TicketJpaEntity {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false,length = 20)
     private TicketStatus status;
-    @Column(nullable = false,name = "create_at")
+    @Column(nullable = false, name = "created_at")
     private Instant createdAt;
 
     protected TicketJpaEntity(){}
