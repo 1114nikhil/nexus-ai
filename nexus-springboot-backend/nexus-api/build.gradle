@@ -3,6 +3,7 @@ plugins{
 }
 
 dependencies {
+    implementation project(':nexus-domain')           // <-- ADD THIS
     implementation project(':nexus-application')
     implementation project(':nexus-infrastructure')
     implementation 'org.springframework.boot:spring-boot-starter-webmvc'
