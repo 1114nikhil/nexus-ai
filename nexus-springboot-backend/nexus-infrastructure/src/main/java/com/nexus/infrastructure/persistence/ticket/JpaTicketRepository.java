@@ -4,6 +4,10 @@ import com.nexus.application.ticket.TicketRepository;
 import com.nexus.domain.ticket.Ticket;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
 @Component
 public class JpaTicketRepository implements TicketRepository {
 
@@ -17,6 +21,16 @@ public class JpaTicketRepository implements TicketRepository {
         TicketJpaEntity ticketJpaEntity= toEntity(ticket);
         TicketJpaEntity saved=springDataTicketRepository.save(ticketJpaEntity);
         return toDomain(saved);
+    }
+
+    @Override
+    public Optional<Ticket> fundById(UUID id) {
+        return springDataTicketRepository.findById(id).map(this::toDomain);
+    }
+
+    @Override
+    public List<Ticket> findAll() {
+        return springDataTicketRepository.findAll().stream().map(this::toDomain).toList();
     }
 
     private Ticket toDomain(TicketJpaEntity entity) {
