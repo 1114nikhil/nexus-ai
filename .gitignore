@@ -1,0 +1,25 @@
+# Python
+venv/
+.venv/
+env/
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+*.egg-info/
+
+# Frontend / Node
+node_modules/
+dist/
+.next/
+
+# Environment variables
+.env
+.env.local
+
+# macOS / Editors
+.DS_Store
+.idea/
+.vscode/
+*.swp
