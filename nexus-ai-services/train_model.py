@@ -56,5 +56,5 @@ print("\nEvaluating model o test set:")
 y_pred=pipeline.predict(X_test)
 print(classification_report(y_test,y_pred,zero_division=0))
 
-joblib.dump(pipeline,'model.pk1')
-print("Model saved to model.pk1")
+joblib.dump(pipeline,'model.pkl')
+print("Model saved to model.pkl")

@@ -33,7 +33,7 @@ import os
 
 app= FastAPI(title="Nexus AI Service")
 
-MODEL_PATH="model.pk1"
+MODEL_PATH="model.pkl"
 
 if os.path.exists(MODEL_PATH):
     model=joblib.load(MODEL_PATH)
@@ -47,7 +47,7 @@ class ClassifyRequest(BaseModel):
 
 class ClassifyResponse(BaseModel):
     priority:str
-    confidence:str
+    confidence:float
 
 @app.get("/health")
 def health_check():
@@ -57,8 +57,12 @@ def health_check():
 def classify___ticket(request:ClassifyRequest):
     if model is None:
         return ClassifyResponse(priority="MEDIUM",confidence=0.0)
-    prediction = model.predicate([request.text])[0]
+    prediction = model.predict([request.text])[0]
     probabilities = model.predict_proba([request.text])[0]
     confidence = float(max(probabilities))
 
     return ClassifyResponse(priority=prediction, confidence=round(confidence, 2))
+
+
+
+    

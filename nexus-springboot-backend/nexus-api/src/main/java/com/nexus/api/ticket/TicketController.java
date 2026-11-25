@@ -25,23 +25,14 @@ public class TicketController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public TicketResponse createTicket(@RequestBody CreateTicketRequest request){
-        CreateTicketCommand command= new CreateTicketCommand(
-                request.title(),
-                request.description(),
-                request.priority()
-        );
+    public TicketResponse createTicket(@RequestBody CreateTicketRequest request) {
+        CreateTicketCommand command = new CreateTicketCommand(
+                request.title(), request.description(), request.priority());
+        UUID ticketId = createTicketUseCase.execute(command);
 
-        UUID ticketId= createTicketUseCase.execute(command);
-
-        return  new TicketResponse(
-                ticketId,
-                request.title(),
-                request.description(),
-                request.priority(),
-                TicketStatus.OPEN,
-                Instant.now()
-        );
+        // Fetch the actual saved ticket — the priority here is the AI's, not the request's
+        Ticket ticket = getTicketUseCase.execute(ticketId);
+        return toResponse(ticket);
     }
 
     @GetMapping("/{id}")
